@@ -9,15 +9,15 @@ import pickle
 import logging
 
 # Define constants and hyperparameters
-BATCH_SIZE = 1024
+BATCH_SIZE = 128
 GAMMA = 0.99
 EPS_START = 0.9
 EPS_END = 0.05
-EPS_DECAY = 200000
-TAU = 0.00005
+EPS_DECAY = 1000
+TAU = 0.005
 LR = 1e-4
 NUM_EPISODES = 256
-LEN_EPISODES = 4096
+LEN_EPISODES = 200
 
 ACTION = namedtuple('action', ['m', 'n', 'frames'])
 Transition = namedtuple('Transition', ('state', 'action', 'next_state', 'reward'))
@@ -39,16 +39,14 @@ logging.basicConfig(filename="train.log", filemode="w")
 class DQN(nn.Module):
     def __init__(self, n_observations, n_actions):
         super(DQN, self).__init__()
-        self.layer1 = nn.Linear(n_observations, 512)
-        self.layer2 = nn.Linear(512, 512)
-        self.layer3 = nn.Linear(512, 512)
-        self.layer4 = nn.Linear(512, n_actions)
+        self.layer1 = nn.Linear(n_observations, 128)
+        self.layer2 = nn.Linear(128, 128)
+        self.layer3 = nn.Linear(128, n_actions)
 
     def forward(self, x):
         x = F.relu(self.layer1(x))
         x = F.relu(self.layer2(x))
-        x = F.relu(self.layer3(x))
-        return self.layer4(x)
+        return self.layer3(x)
 
 # Define the Channel Environment
 class ChannelENV:

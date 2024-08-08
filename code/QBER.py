@@ -137,15 +137,15 @@ def QBER(m, n, pc, e, L0, Nhop, session):
 
 if __name__ == "__main__":
     Nhop = 1
-    L0 = 2
-    p_loss = [0.1, 0.2]
+    L0 = 1
+    p_loss = [0.0, 0.05]
     p_depo = [0.004, 0.008, 0.012, 0.016, 0.02]
     m_range = [3, 15]
     n_range = [3, 23]
     mn_step = 4
     session = WolframLanguageSession()
     session.start()
-    coeff1 = 1.5
+    coeff1 = 1
     coeff2 = 1
     p_loss[1] *= coeff1
     for i in range(len(p_depo)):

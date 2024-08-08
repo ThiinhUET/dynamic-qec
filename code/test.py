@@ -11,7 +11,7 @@ logging.basicConfig(filename="test.log", filemode="w")
 timeslots = 20000
 random.seed(1)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-environment = env.ChannelENV(2, 1, [3, 15], [3, 15], 1000, 10, device)
+environment = env.ChannelENV(1, 1, [3, 15], [3, 15], 1000, 10, device)
 n_actions = len(environment.action_space)
 # Get the number of state observations
 n_observations = environment.max_frames_per_slot + env.max_q_len + n_actions
